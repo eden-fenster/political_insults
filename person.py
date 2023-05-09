@@ -9,20 +9,19 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 # This is an object describing the state of a person.
 class Person:
 
-    def __init__(self, gender: str, pronouns: str, age: int, skin_color: int, political_ideology: str, degree: bool,
-                 job: bool, iPhone: bool):
+    def __init__(self, gender: str, pronouns: str, age: int, skin_color: int, political_ideology: str):
         self._gender = gender
         self._pronouns = pronouns
         self._age = age
         self._skin_color = skin_color
         self._political_ideology = political_ideology
-        self._degree = degree
-        self._job = job
-        self._iPhone = iPhone
+        if political_ideology is not 'Left' and not 'Right':
+            logging.error(f"{political_ideology} is not a valid ideology")
+            sys.exit(1)
         self._insult_list = Insults(political_ideology=political_ideology)
 
-    def triggers_other_side(self, other: Person) -> bool:
-        if other.triggered():
+    def triggers_other_side(self, other_reaction: bool) -> bool:
+        if other_reaction:
             return True
         return False
 
@@ -43,6 +42,9 @@ class Person:
 
 class Insults:
     def __init__(self, political_ideology: str):
+        if political_ideology is not 'Left' and not 'Right':
+            logging.error(f"{political_ideology} is not a valid ideology")
+            sys.exit(1)
         self._political_ideology = political_ideology
         if political_ideology == 'Left':
             self._insults = ['Racist', 'Homophobic', 'Transphobic', 'Xenphobic', 'Nazi', 'Bigot', 'I give up']
