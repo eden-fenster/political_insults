@@ -37,7 +37,6 @@ class Person:
         return False
 
 
-
 class Insults:
     def __init__(self, political_ideology: str):
         if political_ideology != 'Left' and political_ideology != 'Right':
@@ -51,6 +50,7 @@ class Insults:
 
     def get_insult(self) -> str:
         return random.choice(self._insults)
+
 
 class Reaction:
     def __init__(self):
