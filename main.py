@@ -31,7 +31,7 @@ def fight(who_is_making_statement: Person, who_might_get_triggered: Person) -> s
     print(statement)
     # If statement == 'I give up', return.
     if statement == 'I give up':
-        return 'Gave Over'
+        return 'Game Over'
     # print reaction.
     is_triggered: bool = who_might_get_triggered.triggered()
     success: bool = who_is_making_statement.triggers_other_side(other_reaction=is_triggered)
