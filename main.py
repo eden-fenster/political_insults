@@ -27,11 +27,21 @@ def make_person() -> Person:
 # Fight
 def fight(who_is_making_statement: Person, who_might_get_triggered: Person) -> str:
     # print statement.
+    statement: str = who_is_making_statement.make_statement()
+    print(statement)
     # If statement == 'I give up', return.
+    if statement == 'I give up':
+        return 'Gave Over'
     # print reaction.
-    # If reaction == 'I give up', return.
+    is_triggered: bool = who_might_get_triggered.triggered()
+    success: bool = who_is_making_statement.triggers_other_side(other_reaction=is_triggered)
+    if success:
+        print("Triggered")
+    else:
+        print("Not Triggered")
     # Switch between people making statements.
-    pass
+    return fight(who_is_making_statement=who_might_get_triggered,
+                 who_might_get_triggered=who_is_making_statement)
 
 
 if __name__ == '__main__':

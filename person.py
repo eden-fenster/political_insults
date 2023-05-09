@@ -15,7 +15,7 @@ class Person:
         self._age = age
         self._skin_color = skin_color
         self._political_ideology = political_ideology
-        if political_ideology is not 'Left' and not 'Right':
+        if political_ideology != 'Left' and political_ideology != 'Right':
             logging.error(f"{political_ideology} is not a valid ideology")
             sys.exit(1)
         self._insult_list = Insults(political_ideology=political_ideology)
@@ -30,19 +30,17 @@ class Person:
 
     def triggered(self) -> bool:
         reactions: Reaction = Reaction()
-        if reactions.get_reaction() == '*shocked pikachu face*':
+        reaction: str = reactions.get_reaction()
+        print(f'{reaction}')
+        if reaction == '*shocked pikachu face*':
             return True
         return False
 
-    def give_up(self) -> bool:
-        if self.make_statement() == 'I give up':
-            return True
-        return False
 
 
 class Insults:
     def __init__(self, political_ideology: str):
-        if political_ideology is not 'Left' and not 'Right':
+        if political_ideology != 'Left' and political_ideology != 'Right':
             logging.error(f"{political_ideology} is not a valid ideology")
             sys.exit(1)
         self._political_ideology = political_ideology
