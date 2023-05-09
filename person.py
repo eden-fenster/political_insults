@@ -31,7 +31,7 @@ class Person:
     def triggered(self) -> bool:
         reactions: Reaction = Reaction()
         reaction: str = reactions.get_reaction()
-        print(f'{reaction}')
+        print(reaction)
         if reaction == '*shocked pikachu face*':
             return True
         return False
