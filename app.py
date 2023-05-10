@@ -16,7 +16,7 @@ def fight():
     p1 = request.form
     p2 = request.form
     # Start fight.
-    pass
+    return "Loser !"
 
 
 if __name__ == "__main__":
