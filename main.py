@@ -43,9 +43,9 @@ def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Pers
     is_triggered: bool = one_who_might_get_triggered.triggered()
     success: bool = one_who_is_making_statement.triggers_other_side(other_reaction=is_triggered)
     if success:
-        print("Oponent is Triggered")
+        print("Opponent is Triggered")
     else:
-        print("Oponent is not Triggered")
+        print("Opponent is not Triggered")
     print("Waiting for statement...")
     print("")
     # Switch between people making statements.
