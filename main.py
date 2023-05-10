@@ -34,6 +34,8 @@ def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Pers
     # print statement.
     statement: str = one_who_is_making_statement.make_statement()
     print(statement)
+    print("Waiting for reaction...")
+    print("")
     # If statement == 'I give up', return.
     if statement == 'I give up':
         return 'Game Over'
@@ -44,6 +46,8 @@ def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Pers
         print("Oponent is Triggered")
     else:
         print("Oponent is not Triggered")
+    print("Waiting for statement...")
+    print("")
     # Switch between people making statements.
     return fight(one_who_is_making_statement=one_who_might_get_triggered,
                  one_who_might_get_triggered=one_who_is_making_statement)
