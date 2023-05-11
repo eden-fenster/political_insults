@@ -29,7 +29,7 @@ def make_person() -> Person:
     return our_person
 
 
-# Fight
+# Fight - Need to find way to print entire conversation.
 def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Person) -> str:
     # print statement.
     statement: str = one_who_is_making_statement.make_statement()
