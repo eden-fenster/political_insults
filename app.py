@@ -1,4 +1,5 @@
 import json
+import logging
 
 from flask import Flask, render_template, request
 
@@ -15,37 +16,32 @@ people = []
 fight_log = []
 
 
-# Returns the results
-@app.route('/people')
-def get_grids():
-    # Return results.
-    return json.dumps(people)
+# First player
+@app.route('/')
+def input_first():
+    return render_template('index.html')
 
 
-@app.route('/fight')
-def get_fight():
-    # Return results.
-    return json.dumps(fight_log)
+@app.route('/get_second', methods=['GET', 'POST'])
+def get_second():
+    # Input first.
+    gender = request.form.get('gender')
+    pronouns = request.form.get('pronouns')
+    age = request.form.get('age')
+    skin_color = request.form.get('skincolor')
+    political_ideology = request.form.get('politicalideology')
+    # Put into dict.
+    # Sent to processor.
+    logging.debug(f"Input is {gender} \n {pronouns} \n {age} \n {skin_color} \n {political_ideology}")
+    return "Hello World"
 
 
-@app.route('/people', methods=['POST'])
-def add_grids():
-    # Add person to list.
-    people.append(request.get_json())
-    if len(people) == 2:
-        # Put the people into Person objects, calling make_person.
-        p1: Person = Person(gender=people[0]['Gender'], pronouns=people[0]['Pronouns'],
-                            age=people[0]['Age'], skin_color=people[0]['Skin Color'],
-                            political_ideology=people[0]['Political Ideology'])
-        p2: Person = Person(gender=people[1]['Gender'], pronouns=people[1]['Pronouns'],
-                            age=people[1]['Age'], skin_color=people[1]['Skin Color'],
-                            political_ideology=people[1]['Political Ideology'])
-        # Fight
-        fight_string: str = main.fight(one_who_is_making_statement=p1, one_who_might_get_triggered=p2)
-        # Put fight log inside string and return that.
-        fight_log.append(fight_string)
-        # Need to learn how to print in real time on webpage.
-    return '', 204
+def fight():
+    # Input second.
+    # Put into dict.
+    # Sent to processor.
+    # Fight !
+    pass
 
 
 if __name__ == "__main__":
