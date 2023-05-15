@@ -1,6 +1,7 @@
 import json
 import logging
 
+import requests
 from flask import Flask, render_template, request
 
 import main
@@ -30,10 +31,14 @@ def get_second():
     age = request.form.get('age')
     skin_color = request.form.get('skincolor')
     political_ideology = request.form.get('politicalideology')
-    # Put into dict.
-    # Sent to processor.
     logging.debug(f"Input is {gender} \n {pronouns} \n {age} \n {skin_color} \n {political_ideology}")
-    return "Hello World"
+    # Put into dict.
+    dict_to_send: dict = {'Gender': gender, 'Pronouns': pronouns, 'Age': age, 'Skin Color': skin_color,
+                          'Political Ideology': political_ideology}
+    # Sent to processor.
+    requests.post('http://127.0.0.1:8000', json=dict_to_send)
+    logging.debug("Sent")
+    return render_template('index_2.html')
 
 
 def fight():
