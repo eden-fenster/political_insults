@@ -1,12 +1,8 @@
-import json
 import logging
 
 import requests
 from flask import Flask, render_template, request
 
-import main
-from main import make_person, fight
-from person import Person
 
 app = Flask(__name__)
 
@@ -23,32 +19,22 @@ def input_first():
     return render_template('index.html')
 
 
-@app.route('/get_second', methods=['GET', 'POST'])
-def get_second():
-    # Input first.
-    gender = request.form.get('gender')
-    pronouns = request.form.get('pronouns')
-    age = request.form.get('age')
-    skin_color = request.form.get('skincolor')
-    political_ideology = request.form.get('politicalideology')
-    logging.debug(f"Input is {gender} \n {pronouns} \n {age} \n {skin_color} \n {political_ideology}")
-    # Put into dict.
-    dict_to_send: dict = {'Gender': gender, 'Pronouns': pronouns, 'Age': age, 'Skin Color': skin_color,
-                          'Political Ideology': political_ideology}
-    # Sent to processor.
-    requests.post('http://127.0.0.1:8000', json=dict_to_send)
-    logging.debug("Sent")
-    return render_template('index_2.html')
-
 @app.route('/fight', methods=['GET', 'POST'])
 def fight():
-    # Input second.
-    gender = request.form.get('gender')
-    pronouns = request.form.get('pronouns')
-    age = request.form.get('age')
-    skin_color = request.form.get('skincolor')
-    political_ideology = request.form.get('politicalideology')
-    logging.debug(f"Input is {gender} \n {pronouns} \n {age} \n {skin_color} \n {political_ideology}")
+    # Input the two players.
+    gender_1 = request.form.get('gender1')
+    pronouns_1 = request.form.get('pronouns1')
+    age_1 = request.form.get('age1')
+    skin_color_1 = request.form.get('skincolor1')
+    political_ideology_1 = request.form.get('politicalideology1')
+    logging.debug(f"Input is {gender_1} \n {pronouns_1} \n {age_1} \n {skin_color_1} \n {political_ideology_1}")
+
+    gender_2 = request.form.get('gender2')
+    pronouns_2 = request.form.get('pronouns2')
+    age_2 = request.form.get('age2')
+    skin_color_2 = request.form.get('skincolor2')
+    political_ideology_2 = request.form.get('politicalideology2')
+    logging.debug(f"Input is {gender_2} \n {pronouns_2} \n {age_2} \n {skin_color_2} \n {political_ideology_2}")
     # Put into dict.
     dict_to_send: dict = {'Gender': gender, 'Pronouns': pronouns, 'Age': age, 'Skin Color': skin_color,
                           'Political Ideology': political_ideology}

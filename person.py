@@ -9,7 +9,7 @@ logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 # This is an object describing the state of a person.
 class Person:
 
-    def __init__(self, gender: str, pronouns: str, age: int, skin_color: int, political_ideology: str):
+    def __init__(self, gender: str, pronouns: str, age: int, skin_color: str, political_ideology: str):
         self._gender = gender
         self._pronouns = pronouns
         self._age = age
