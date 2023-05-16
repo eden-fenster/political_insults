@@ -40,13 +40,25 @@ def get_second():
     logging.debug("Sent")
     return render_template('index_2.html')
 
-
+@app.route('/fight', methods=['GET', 'POST'])
 def fight():
     # Input second.
+    gender = request.form.get('gender')
+    pronouns = request.form.get('pronouns')
+    age = request.form.get('age')
+    skin_color = request.form.get('skincolor')
+    political_ideology = request.form.get('politicalideology')
+    logging.debug(f"Input is {gender} \n {pronouns} \n {age} \n {skin_color} \n {political_ideology}")
     # Put into dict.
+    dict_to_send: dict = {'Gender': gender, 'Pronouns': pronouns, 'Age': age, 'Skin Color': skin_color,
+                          'Political Ideology': political_ideology}
     # Sent to processor.
+    requests.post('http://127.0.0.1:8000', json=dict_to_send)
+    logging.debug("Sent")
     # Fight !
-    pass
+    response = requests.get('http://127.0.0.1:8000')
+    logging.debug("Got Response")
+    return response.json()
 
 
 if __name__ == "__main__":
