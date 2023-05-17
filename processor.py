@@ -1,5 +1,7 @@
 import json
 import logging
+import re
+
 from flask import Flask, request
 
 from main import fight
@@ -24,25 +26,27 @@ def get_grids():
 @app.route('/fight')
 def get_fight():
     # Return results.
-    return json.dumps(fight_log)
+    printing_fight = json.dumps(fight_log)
+    formatted_fight = re.sub(r"[\[\]]", "", printing_fight)
+    return json.dumps(formatted_fight)
 
 
 @app.route('/people', methods=['POST'])
 def add_grids():
     # Add person to list.
-    logging.debug("Received")
+    print("Received")
     people.append(request.get_json())
 
     # Put the people into Person objects, calling make_person.
-    p1: Person = Person(gender=people['Gender 1'], pronouns=people['Pronouns 1'],
-                        age=people['Age 1'], skin_color=people['Skin Color 1'],
-                        political_ideology=people['Political Ideology 1'])
-    p2: Person = Person(gender=people['Gender 2'], pronouns=people['Pronouns 2'],
-                        age=people['Age 2'], skin_color=people['Skin Color 2'],
-                        political_ideology=people['Political Ideology 2'])
+    p1: Person = Person(gender=people[0]['Gender 1'], pronouns=people[0]['Pronouns 1'],
+                        age=people[0]['Age 1'], skin_color=people[0]['Skin Color 1'],
+                        political_ideology=people[0]['Political Ideology 1'])
+    p2: Person = Person(gender=people[0]['Gender 2'], pronouns=people[0]['Pronouns 2'],
+                        age=people[0]['Age 2'], skin_color=people[0]['Skin Color 2'],
+                        political_ideology=people[0]['Political Ideology 2'])
     # Fight
-    fight_string: str = fight(one_who_is_making_statement=p1, one_who_might_get_triggered=p2)
-    logging.debug(f"fight is {fight_string}")
+    fight_string: str = fight(one_who_is_making_statement=p1, one_who_might_get_triggered=p2, return_string='')
+    print(f"fight is {fight_string}")
     # Put fight log inside string and return that.
     fight_log.append(fight_string)
     # Need to learn how to print in real time on webpage.

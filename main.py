@@ -30,27 +30,27 @@ def make_person() -> Person:
 
 
 # Fight - Need to find way to print entire conversation.
-def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Person) -> str:
+def fight(one_who_is_making_statement: Person, one_who_might_get_triggered: Person, return_string: str) -> str:
     # print statement.
     statement: str = one_who_is_making_statement.make_statement()
-    print(statement)
-    print("Waiting for reaction...")
-    print("")
+    return_string += statement + "<br>"
+    return_string += "Waiting for reaction... <br>"
+    return_string += "<br>"
     # If statement == 'I give up', return.
     if statement == 'I give up':
-        return 'Game Over'
+        return return_string + 'Game Over'
     # print reaction.
     is_triggered: bool = one_who_might_get_triggered.triggered()
     success: bool = one_who_is_making_statement.triggers_other_side(other_reaction=is_triggered)
     if success:
-        print("Opponent is Triggered")
+        return_string += "Opponent is Triggered <br>"
     else:
-        print("Opponent is not Triggered")
-    print("Waiting for statement...")
-    print("")
+        return_string += "Opponent is not Triggered <br>"
+    return_string += "Waiting for statement... <br>"
+    return_string += "<br>"
     # Switch between people making statements.
     return fight(one_who_is_making_statement=one_who_might_get_triggered,
-                 one_who_might_get_triggered=one_who_is_making_statement)
+                 one_who_might_get_triggered=one_who_is_making_statement, return_string=return_string)
 
 
 if __name__ == '__main__':
