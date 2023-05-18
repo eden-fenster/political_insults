@@ -21,7 +21,7 @@ def get_grids():
     # Return results.
     return json.dumps(people)
 
-
+# How to return webpages in delay - read about it.
 @app.route('/fight')
 def get_fight():
     # Return results.

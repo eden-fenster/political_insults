@@ -10,7 +10,7 @@ def main():
     print("Player 2: \n")
     person_two: Person = make_person()
     # Start fight and continue until one gives up.
-    print(fight(one_who_is_making_statement=person_one, one_who_might_get_triggered=person_two))
+    print(fight(one_who_is_making_statement=person_one, one_who_might_get_triggered=person_two, return_string=''))
 
 
 # Creates person by getting details.
