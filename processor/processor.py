@@ -1,5 +1,4 @@
 import json
-import logging
 import re
 
 from flask import Flask, request
@@ -50,6 +49,7 @@ def add_grids():
     # Put fight log inside string and return that.
     fight_log.append(fight_string)
     # Need to learn how to print in real time on webpage.
+    # for every line in return string, return what we have up until now + new line.
     return '', 204
 
 
