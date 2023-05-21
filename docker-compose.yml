@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  political_insults_web:
+    depends_on:
+      - political_insults_processor
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    container_name: political_insults_web
+    hostname: political_insults_web
+
+
+  political_insults_processor:
+    build:
+      context: .
+      dockerfile: processor/Dockerfile
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    container_name: political_insults_processor
+    hostname: political_insults_processor
