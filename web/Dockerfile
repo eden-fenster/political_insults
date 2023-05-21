@@ -18,6 +18,6 @@ EXPOSE 5000
 
 COPY web/*.py /political_insults_web/web/
 COPY web/templates/*.html /political_insults_web/web/templates/
-COPY web/static/styles/*.css /political_insults_web/web/static/styles/
+COPY web/static/*.css /political_insults_web/web/static/
 
 CMD ["flask", "run"]

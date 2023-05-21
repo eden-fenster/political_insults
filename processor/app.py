@@ -1,4 +1,5 @@
 import json
+import logging
 import re
 
 from flask import Flask, request
@@ -33,7 +34,7 @@ def get_fight():
 @app.route('/people', methods=['POST'])
 def add_grids():
     # Add person to list.
-    print("Received")
+    logging.debug("Received")
     people.append(request.get_json())
 
     # Put the people into Person objects, calling make_person.
@@ -45,7 +46,7 @@ def add_grids():
                         political_ideology=people[0]['Political Ideology 2'])
     # Fight
     fight_string: str = fight(one_who_is_making_statement=p1, one_who_might_get_triggered=p2, return_string='')
-    print(f"fight is {fight_string}")
+    logging.debug(f"fight is {fight_string}")
     # Put fight log inside string and return that.
     fight_log.append(fight_string)
     # Need to learn how to print in real time on webpage.
@@ -54,4 +55,4 @@ def add_grids():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000, host='0.0.0.0')
+    app.run(debug=True, port=8000, host='political_insults_processor')

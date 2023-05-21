@@ -41,13 +41,13 @@ def fight():
                           'Pronouns 2': pronouns_2, 'Age 2': age_2, 'Skin Color 2': skin_color_2,
                           'Political Ideology 2': political_ideology_2}
     # Sent to processor.
-    requests.post('http://127.0.0.1:8000/people', json=dict_to_send)
-    print("Sent")
+    requests.post('http://political_insults_processor:8000/people', json=dict_to_send)
+    logging.debug("Sent")
     # Fight !
-    response = requests.get('http://127.0.0.1:8000/fight')
+    response = requests.get('http://political_insults_processor:8000/fight')
     logging.debug("Got Response")
     return response.json()
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='political_insults_web')
