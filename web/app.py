@@ -8,10 +8,6 @@ from flask import Flask, render_template, request, render_template_string
 app = Flask(__name__)
 
 # Opening page to input details.
-# List to store received people.
-people = []
-# List to store fight
-fight_log = []
 
 
 # First player

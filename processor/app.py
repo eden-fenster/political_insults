@@ -3,6 +3,7 @@
 import json
 import logging
 import re
+from typing import List
 
 from flask import Flask, request
 
@@ -13,9 +14,9 @@ app = Flask(__name__)
 
 # Opening page to input details.
 # List to store received people.
-people = []
+people: List[dict] = []
 # List to store fight
-fight_log = []
+fight_log: List[str] = []
 
 
 # Returns the results

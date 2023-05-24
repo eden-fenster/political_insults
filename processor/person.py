@@ -7,9 +7,13 @@ import random
 logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
+# pylint: disable=too-many-arguments
+# pylint: disable=too-few-public-methods
+
 # This is an object describing the state of a person.
 class Person:
     """The Person class"""
+
     def __init__(self, gender: str, pronouns: str,
                  age: int, skin_color: str, political_ideology: str):
         self._gender = gender
@@ -44,6 +48,7 @@ class Person:
 
 class Insults:
     """Insults class"""
+
     def __init__(self, political_ideology: str):
         """Attributes"""
         if political_ideology not in ('Left', 'Right'):
@@ -64,6 +69,7 @@ class Insults:
 
 class Reaction:
     """Reaction class"""
+
     def __init__(self):
         """Attributes"""
         self._reactions = ['*eye roll*', '*shocked pikachu face*']
