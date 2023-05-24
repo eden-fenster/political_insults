@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  political_insults_web:
+  web:
     depends_on:
-      - political_insults_processor
+      - processor
     build:
       context: .
       dockerfile: web/Dockerfile
@@ -14,7 +14,7 @@ services:
     hostname: political_insults_web
 
 
-  political_insults_processor:
+  processor:
     build:
       context: .
       dockerfile: processor/Dockerfile
