@@ -2,7 +2,7 @@
 
 FROM python:3.10.6
 
-WORKDIR /political_insults_processor
+WORKDIR /political_insults_processor_directory
 
 
 ENV FLASK_APP=processor/app.py
@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 EXPOSE 8000
 
 # Copy database to directory.
-COPY processor/*.py /political_insults_processor/processor/
+COPY processor/*.py /political_insults_processor_directory/processor/
 
 
 CMD ["flask", "run", "-p", "8000"]
