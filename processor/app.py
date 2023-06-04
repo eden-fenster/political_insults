@@ -3,14 +3,19 @@
 import json
 import logging
 import re
+import time
 from typing import List
+from datetime import datetime
 
+import requests
 from flask import Flask, request
 
 from main import fight
 from person import Person
 
 app = Flask(__name__)
+
+# pylint: disable=consider-using-f-string
 
 # Opening page to input details.
 # List to store received people.
@@ -45,14 +50,24 @@ def add_grids():
     p_2: Person = Person(gender=people[0]['Gender 2'], pronouns=people[0]['Pronouns 2'],
                          age=people[0]['Age 2'], skin_color=people[0]['Skin Color 2'],
                          political_ideology=people[0]['Political Ideology 2'])
+    # Getting current date and time
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    start = time.time()
     # Fight
     fight_string: str = \
         fight(one_who_is_making_statement=p_1, one_who_might_get_triggered=p_2, return_string='')
+    end = time.time()
+    total_time = end - start
     logging.debug("fight is %s", fight_string)
+    # Adding log to database
+    total_time_string: str = str("%.2f" % total_time)
+    requests.post("http://political_insults_database:3000/database",
+                  json={"Time": total_time_string, "Date": dt_string,
+                        "Log": fight_string}, timeout=10)
+    logging.debug("Added to database")
     # Put fight log inside string and return that.
     fight_log.append(fight_string)
-    # Need to learn how to print in real time on webpage.
-    # for every line in return string, return what we have up until now + new line.
     return '', 204
 
 

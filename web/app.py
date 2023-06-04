@@ -2,7 +2,6 @@
 """Political Insults Game - Web"""
 # TODO: Learn enough JS to have it print one at a time on the screen.
 # TODO: Add to CSS in the meanwhile.
-# TODO: Database with fight logs.
 import logging
 
 import requests

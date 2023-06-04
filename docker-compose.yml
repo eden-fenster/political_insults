@@ -24,3 +24,14 @@ services:
       - 8000
     container_name: political_insults_processor
     hostname: political_insults_processor
+
+  database:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    container_name: political_insults_database
+    hostname: political_insults_database
