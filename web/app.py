@@ -52,7 +52,7 @@ def fight():
     # Fight !
     response = requests.get('http://political_insults_processor:8000/fight', timeout=10)
     logging.debug("Got Response")
-    return render_template('style.html', Title='Fight Log')\
+    return render_template('style.html', Title='Fight Log', Content='Here is the fight log')\
         + render_template_string(response.json())
 
 
