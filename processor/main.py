@@ -4,6 +4,7 @@ from person import Person
 
 
 # Fight - Need to find way to print entire conversation.
+# TODO: For each line ,add as a new element to list.
 def fight(one_who_is_making_statement: Person,
           one_who_might_get_triggered: Person, return_string: str) -> str:
     """The fight itself"""
