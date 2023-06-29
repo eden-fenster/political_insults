@@ -3,7 +3,9 @@
 # TODO: Learn enough JS to have it print one at a time on the screen.
 # TODO: Add to CSS in the meanwhile.
 import logging
+from typing import List
 
+from split import back_to_list
 import requests
 from flask import Flask, render_template, request, render_template_string
 
@@ -52,8 +54,8 @@ def fight():
     # Fight !
     response = requests.get('http://political_insults_processor:8000/fight', timeout=10)
     logging.debug("Got Response")
-    return render_template('style.html', Title='Fight Log', Content='Here is the fight log')\
-        + render_template_string(response.json())
+    to_print: List[str] = back_to_list(string=response.json())
+    return render_template('style.html', Title='Fight Log', Content='Here is the fight log', List=to_print)
 
 
 if __name__ == "__main__":

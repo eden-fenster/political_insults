@@ -4,7 +4,6 @@ from person import Person
 
 
 # Fight - Need to find way to print entire conversation.
-# TODO: For each line ,add as a new element to list.
 def fight(one_who_is_making_statement: Person,
           one_who_might_get_triggered: Person, return_string: str) -> str:
     """The fight itself"""
@@ -12,7 +11,7 @@ def fight(one_who_is_making_statement: Person,
     statement: str = one_who_is_making_statement.make_statement()
     return_string += statement + "<br>"
     return_string += "Waiting for reaction... <br>"
-    return_string += "<br>"
+    # return_string += "<br>"
     # If statement == 'I give up', return.
     if statement == 'I give up':
         return return_string + 'Game Over'
@@ -24,7 +23,7 @@ def fight(one_who_is_making_statement: Person,
     else:
         return_string += "Opponent is not Triggered <br>"
     return_string += "Waiting for statement... <br>"
-    return_string += "<br>"
+    # return_string += "<br>"
     # Switch between people making statements.
     return fight(one_who_is_making_statement=one_who_might_get_triggered,
                  one_who_might_get_triggered=one_who_is_making_statement,
