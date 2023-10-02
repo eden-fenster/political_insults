@@ -18,6 +18,7 @@ EXPOSE 5000
 
 COPY web/*.py /political_insults_web_directory/web/
 COPY web/templates/*.html /political_insults_web_directory/web/templates/
+COPY web/static/favicon.ico /political_insults_web_directory/web/static/
 COPY web/static/styles/*.css /political_insults_web_directory/web/static/styles/
 COPY web/static/scripts/*.js /political_insults_web_directory/web/static/scripts/
 
