@@ -5,9 +5,11 @@ from typing import List
 
 from split import back_to_list
 import requests
-from flask import Flask, render_template, request, render_template_string
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
+
+# pylint: disable=logging-fstring-interpolation
 
 # Opening page to input details.
 
@@ -16,6 +18,7 @@ app = Flask(__name__)
 @app.route('/')
 def input_first():
     """Input the players"""
+    logging.debug("Loading homepage")
     return render_template('index.html')
 
 
@@ -28,8 +31,7 @@ def fight():
     age_1 = request.form.get('age1')
     skin_color_1 = request.form.get('skincolor1')
     political_ideology_1 = request.form.get('politicalideology1')
-    print\
-        (f"Input is {gender_1} \n {pronouns_1} \n {age_1}"
+    logging.debug(f"Input is {gender_1} \n {pronouns_1} \n {age_1}"
          f" \n {skin_color_1} \n {political_ideology_1}")
 
     gender_2 = request.form.get('gender2')
@@ -37,10 +39,10 @@ def fight():
     age_2 = request.form.get('age2')
     skin_color_2 = request.form.get('skincolor2')
     political_ideology_2 = request.form.get('politicalideology2')
-    print\
-        (f"Input is {gender_2} \n {pronouns_2} \n {age_2}"
+    logging.debug(f"Input is {gender_2} \n {pronouns_2} \n {age_2}"
          f" \n {skin_color_2} \n {political_ideology_2}")
     # Put into dict.
+    logging.debug("Putting people into the dictionary to send")
     dict_to_send: dict = {'Gender 1': gender_1, 'Pronouns 1': pronouns_1, 'Age 1': age_1,
                           'Skin Color 1': skin_color_1,
                           'Political Ideology 1': political_ideology_1, 'Gender 2': gender_2,
@@ -48,12 +50,14 @@ def fight():
                           'Political Ideology 2': political_ideology_2}
     # Sent to processor.
     requests.post('http://political_insults_processor:8000/people', json=dict_to_send, timeout=10)
-    logging.debug("Sent")
+    logging.debug("Sent to processor")
     # Fight !
     response = requests.get('http://political_insults_processor:8000/fight', timeout=10)
-    logging.debug("Got Response")
+    logging.debug("Got Response from processor")
     to_print: List[str] = back_to_list(string=response.json())
-    return render_template('style.html', Title='Fight Log', Content='Here is the fight log', List=to_print)
+    logging.debug("Saving response to print")
+    return render_template('style.html', Title='Fight Log',
+                           Content='Here is the fight log', List=to_print)
 
 
 if __name__ == "__main__":
